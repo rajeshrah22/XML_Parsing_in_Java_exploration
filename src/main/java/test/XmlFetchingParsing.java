@@ -36,18 +36,20 @@ public class XmlFetchingParsing extends HttpServlet {
 			//gets inputStream from URL
 			URL url = new URL("https://retro.umoiq.com/service/publicXMLFeed?command=agencyList");
 			InputStream stream = url.openStream();
-			System.out.println(stream); //debug print
+			//System.out.println(stream); //debug print
 			
 			//StaxParser Setup
 			XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
 			XMLEventReader reader = xmlInputFactory.createXMLEventReader(stream);
-			
+			//System.out.println("yesss");
 			while (reader.hasNext()) {
+				
 				XMLEvent nextEvent = reader.nextEvent();
 				if (nextEvent.isStartElement()) {
+					System.out.println("\n----------");
 					StartElement startElm = nextEvent.asStartElement();
 					//if element is not an agency, then skip
-					if (!startElm.getName().getLocalPart().equals("Agency")) {
+					if (!startElm.getName().getLocalPart().equals("agency")) {
 						continue;
 					}
 					
